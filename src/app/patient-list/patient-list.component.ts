@@ -31,6 +31,9 @@ export class PatientListComponent implements OnInit {
         this.filteredPatientList.push(patient);
       }
     });
+
+    console.log(this.filteredPatientList);
+    
   }
 
 }

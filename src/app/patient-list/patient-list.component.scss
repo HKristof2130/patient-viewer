@@ -1,0 +1,23 @@
+table{
+    margin-top: 10px;
+    font-size: large;
+    width: 100%;
+    border: 5px solid #860038;
+}
+
+thead{
+    color: #860038 ;
+    background-color: #FDBB30 ;
+}
+
+td{
+    vertical-align: middle;
+}
+
+tbody tr:hover{
+    color: #860038;
+    background-color: #FDBB30;
+}
+
+
+

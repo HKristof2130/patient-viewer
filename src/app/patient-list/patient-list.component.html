@@ -1,0 +1,19 @@
+<app-patient-searcher (stringForSearchInPatientList)="searchForResultsInTheTable($event)"></app-patient-searcher>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Gender</td>
+            <td>Date of Birth</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let patient of filteredPatientList">
+            <td>{{patient.id}}</td>
+            <td>{{patient.name}}</td>
+            <td>{{patient.gender}}</td>
+            <td>{{patient.dateOfBirth | date : 'longDate' }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -10,16 +10,19 @@ import { Patient } from '../interfaces/patient.interface';
 })
 export class PatientsService {
 
+  private static readonly WAITING_TIME_FOR_SERVER = 3000;
+
   patients : Patient[] = [] ;
 
   constructor() {
-    this.patients =  this.mapJsonToPatientArray() ;
+    this.mapJsonToPatientArray();
     /*
     this.maptToPatientArraySasiWay(data1,this.patients);
     this.maptToPatientArraySasiWay(data2,this.patients);
     this.maptToPatientArraySasiWay(data3,this.patients);
     */
   }
+
 
   getPatientList() : Patient[]{
     return this.patients;
@@ -30,12 +33,15 @@ export class PatientsService {
     target.push(...json.list);
   }
 
-  private mapJsonToPatientArray() : Patient[]{
+  
+  private mapJsonToPatientArray(){
 
     let patinetsToMap : Patient[] = [] ;
     
+    
     data1.forEach( element => {
 
+      
       const tmpPatient : Patient = {
         id : element.id,
         name : element.name,
@@ -74,7 +80,7 @@ export class PatientsService {
     });
 
     console.log("finished with mapping");
-    return patinetsToMap;
+    this.patients =  patinetsToMap;
   }
 
   private getGender(gender: string): Gender {

@@ -16,11 +16,18 @@ export class PatientListComponent implements OnInit {
   constructor(private patientService: PatientsService) { }
 
   ngOnInit(): void {
-    this.patientList = this.patientService.getPatientList();
-    this.filteredPatientList = this.patientList;
+
+    let waiting = true;
+    setTimeout(() => {
+      this.patientList = this.patientService.getPatientList();
+      this.filteredPatientList = this.patientService.getPatientList();
+    }, 3000);
+    
+
+    console.log("Got Data From server");
     console.log(this.patientList);
-
-
+ 
+   
   }
 
   searchForResultsInTheTable($event: string) {
@@ -35,5 +42,7 @@ export class PatientListComponent implements OnInit {
     console.log(this.filteredPatientList);
     
   }
+
+ 
 
 }

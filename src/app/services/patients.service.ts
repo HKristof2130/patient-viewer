@@ -23,16 +23,12 @@ export class PatientsService {
     let patinetsToMap : Patient[] = [] ;
     
     data.forEach( element => {
-      const dataId: number = element.id;
-      const dataName: string = element.name;
-      const dataGender: Gender = this.getGender(element.gender);
-      const dataBirthDate : Date = new Date(element.dateOfBirth);
 
       const tmpPatient : Patient = {
-        id : dataId,
-        name : dataName,
-        gender : dataGender,
-        dateOfBirth : dataBirthDate
+        id : element.id,
+        name : element.name,
+        gender : this.getGender(element.gender),
+        dateOfBirth : new Date(element.dateOfBirth),
       }
 
       patinetsToMap.push(tmpPatient);
@@ -44,7 +40,9 @@ export class PatientsService {
   }
 
   private getGender(gender: string): Gender {
+
     switch (gender) {
+      
       case "male":
         return Gender.MALE;
 

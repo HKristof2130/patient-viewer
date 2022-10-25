@@ -10,23 +10,17 @@ import { PatientsService } from '../services/patients.service';
 })
 export class PatientListComponent implements OnInit {
 
+  private static readonly SERVER_RESPONSE_TIME : number = 4000;
   patientList: Patient[] = [];
   filteredPatientList: Patient[] = [];
+  loading : boolean = true;
 
   constructor(private patientService: PatientsService) { }
 
   ngOnInit(): void {
 
-    let waiting = true;
-    setTimeout(() => {
-      this.patientList = this.patientService.getPatientList();
-      this.filteredPatientList = this.patientService.getPatientList();
-    }, 3000);
-    
-
-    console.log("Got Data From server");
-    console.log(this.patientList);
- 
+    this.loading = true;
+    this.loadPatientList();
    
   }
 
@@ -41,6 +35,17 @@ export class PatientListComponent implements OnInit {
 
     console.log(this.filteredPatientList);
     
+  }
+
+  async loadPatientList(){
+    
+    await setTimeout(() => {
+      this.patientList = this.patientService.getPatientList();
+      this.filteredPatientList = this.patientService.getPatientList();
+      console.log(this.patientList);
+      this.loading = false;
+    }, PatientListComponent.SERVER_RESPONSE_TIME);
+   
   }
 
  

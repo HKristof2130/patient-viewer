@@ -15,7 +15,7 @@ export class PatientsService {
   patients : Patient[] = [] ;
 
   constructor() {
-    this.mapJsonToPatientArray();
+    this.patients = this.mapJsonToPatientArray(data1,data2,data3);
     /*
     this.maptToPatientArraySasiWay(data1,this.patients);
     this.maptToPatientArraySasiWay(data2,this.patients);
@@ -28,59 +28,36 @@ export class PatientsService {
     return this.patients;
   }
 
-  private maptToPatientArraySasiWay(json: any, target: Patient[]){
+  private maptToPatientArrayWithSasiWay(json: any, target: Patient[]){
      
     target.push(...json.list);
   }
 
   
-  private mapJsonToPatientArray(){
+  private mapJsonToPatientArray(...datas : any) : Patient[]{
 
     let patinetsToMap : Patient[] = [] ;
     
-    
-    data1.forEach( element => {
+    datas.forEach( (data : any) => {
+      data.list.forEach( (element : Patient) => {
 
       
-      const tmpPatient : Patient = {
-        id : element.id,
-        name : element.name,
-        gender : this.getGender(element.gender),
-        dateOfBirth : new Date(element.dateOfBirth),
-      }
-
-      patinetsToMap.push(tmpPatient);
- 
+        const tmpPatient : Patient = {
+          id : element.id,
+          name : element.name,
+          gender : this.getGender(element.gender),
+          dateOfBirth : new Date(element.dateOfBirth),
+        }
+  
+        patinetsToMap.push(tmpPatient);
+   
+      });
     });
+    
+   
 
-    data2.list.forEach( element => {
-
-      const tmpPatient : Patient = {
-        id : element.id,
-        name : element.name,
-        gender : this.getGender(element.gender),
-        dateOfBirth : new Date(element.dateOfBirth),
-      }
-
-      patinetsToMap.push(tmpPatient);
- 
-    });
-
-    data3.list.forEach( element => {
-
-      const tmpPatient : Patient = {
-        id : element.id,
-        name : element.name,
-        gender : this.getGender(element.gender),
-        dateOfBirth : new Date(element.dateOfBirth),
-      }
-
-      patinetsToMap.push(tmpPatient);
- 
-    });
-
-    console.log("finished with mapping");
-    this.patients =  patinetsToMap;
+    return patinetsToMap;
+    
   }
 
   private getGender(gender: string): Gender {
@@ -98,4 +75,6 @@ export class PatientsService {
 
     }
   }
+
+  
 }

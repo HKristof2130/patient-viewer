@@ -2,21 +2,23 @@
 <table>
     <thead>
         <tr>
-            <td>ID</td>
+            <!-- <td>ID</td> !-->
             <td>Name</td>
             <td>Gender</td>
             <td>Date of Birth</td>
         </tr>
     </thead>
-    <tbody *ngIf="filteredPatientList.length !== 0; else elseBlock">
+    <tbody *ngIf="filteredPatientList.length !== 0; else loadingBlock">
         <tr *ngFor="let patient of filteredPatientList">
-            <td>{{patient.id}}</td>
+            <!-- <td>{{patient.id}}</td> !-->
             <td>{{patient.name}}</td>
             <td>{{patient.gender}}</td>
             <td>{{patient.dateOfBirth | date : 'longDate' }}</td>
         </tr>
     </tbody>
-    <ng-template #elseBlock>
-        <img src="assets/loading.gif">
+    <ng-template #loadingBlock >
+        <img *ngIf="loading; else elseBlock" src="assets/loading.gif">
     </ng-template>
+        <p>Sorry can't load anything</p>
+    <ng-template #elseBlock></ng-template>
 </table>
